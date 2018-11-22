@@ -21,6 +21,7 @@ void initcurses(){
 
 void cleanup(){
 	echo();
+	nocbreak();
 	endwin();
 
 	return;
@@ -63,6 +64,9 @@ int main(){
 	long unsigned int c_frame = 0; //c-frame
 	std::chrono::duration<double> delta_start; //time since start
 
+	//set up animation 
+	vector<string> deerAnimation = getAnim(string("anim1.txt"));
+
 	start = std::chrono::high_resolution_clock::now();
 
 	//mainloop
@@ -74,11 +78,8 @@ int main(){
 		delta_start = std::chrono::duration_cast< std::chrono::duration<double> >(c_time - start);
 		if(delta_start.count() > (delta_frame * c_frame)){
 			//alternating "X" and "O" every second(30 frames)
-			if(((int)floor(c_frame / 30) % 2) == 0){
-				addstr("O");
-			} else {
-				addstr("X");
-			}
+			int c_anim_frame = (int)floor(c_frame / (frames / 4)) % deerAnimation.size();
+			addstr(deerAnimation[c_anim_frame].c_str());
 			c_frame++;
 		}
 
@@ -93,6 +94,8 @@ int main(){
 		refresh();
 
 	}
+
+	cleanup();
 
 	return 0;
 
