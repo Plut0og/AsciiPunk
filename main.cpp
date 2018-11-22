@@ -11,12 +11,14 @@ void initcurses(){
 	curs_set(0);
 	keypad(stdscr, TRUE);
 
-	return 
+	return;
 }
 
 void cleanup(){
 	echo();
 	endwin();
+
+	return;
 }
 
 int main(){
