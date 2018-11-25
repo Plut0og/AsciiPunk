@@ -35,7 +35,7 @@ int main(){
 
 	//mainloop
 	bool isRunning = true;
-	Animation anim("anim1.txt",2);
+	Animation anim("anim2.txt",3);
 	anim.start();
 	while(isRunning){
 
